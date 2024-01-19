@@ -1,0 +1,320 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("./fonts/Poppins-Regular.ttf");
+}
+
+*:not(i, .fa, .far, .fas) {
+    font-family: "Poppins" !important;
+}
+
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand).sidebar-focused,
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):not(:hover) {
+    width: 100px;
+}
+
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):not(:hover)
+    .bars,
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):not(:hover)
+    p {
+    display: none;
+}
+
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):not(:hover)
+    .img-icon {
+    width: 50px;
+    transform: translateX(17px);
+}
+
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):not(:hover)
+    .nav-sidebar
+    .menu-open
+    > .nav-treeview {
+    display: none;
+}
+
+.nav-item.active {
+    padding-left: 25px !important;
+}
+
+.btn-custom {
+    border-radius: 10px;
+    color: white;
+    background: #1d60a2 !important;
+}
+
+.btn-custom:hover {
+    color: white;
+    background: #0479ee !important;
+}
+
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):not(:hover)
+    .nav.nav-pills {
+    align-items: center;
+    justify-content: center;
+}
+
+.start-nav {
+    margin-top: 50px !important;
+}
+
+.nav-icon p {
+    color: #a5a5a5;
+}
+
+.nav-item {
+    padding: 5px !important;
+}
+
+.nav-item.sub-item.active {
+    padding: 0 !important;
+}
+
+.nav-item.sub-item .nav-link {
+    width: calc(250px - 0.5rem * 11) !important;
+}
+
+.nav-treeview .nav-item:first-child .nav-link {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.nav-treeview .nav-item:last-child .nav-link {
+    border-radius: 0 0 10px 10px !important;
+}
+
+.nav-link.active {
+    background-color: #1d60a2 !important;
+    width: calc(250px - 0.5rem * 4) !important;
+}
+
+.sidebar-collapse.sidebar-mini .main-sidebar .nav-sidebar .nav-link {
+    width: 3.6rem !important;
+}
+
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand).sidebar-focused,
+.sidebar-mini.sidebar-collapse
+    .main-sidebar:not(.sidebar-no-expand):hover
+    .nav-link {
+    width: calc(250px - 0.5rem * 11) !important;
+}
+
+/* Navbar */
+
+.navbar-custom {
+    border: none !important;
+}
+
+.navbar-custom .dropdown {
+    margin-right: 20px;
+}
+
+.button-profil {
+    background-color: #f9f9f9;
+    border-radius: 11px;
+    padding: 10px;
+}
+
+.dropdown-menu.custom > :first-child {
+    border-bottom: 1px solid black !important;
+}
+
+.dropdown-menu.custom {
+    border: none !important;
+}
+
+.wrap-custom {
+    background-color: #f9f9f9 !important;
+}
+
+/* dashboard */
+
+.wrap-custom .content-header h1 {
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.box-custom {
+    background-color: white !important;
+    border-radius: 20px;
+    width: 300px !important;
+    padding: 20px 15px;
+}
+
+.box-custom .header {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+.box-custom .number {
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+.box-custom .d-flex {
+    margin-left: 20px;
+}
+
+.dataTables.dataTable.no-footer.dtr-inline {
+    width: 100% !important;
+}
+
+.qr-screen .header {
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.qr-screen .hour {
+    color: var(--color1, #1d60a2);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.qr-screen .date {
+    color: var(--black, #000);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.qr-screen .box-qr {
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid var(--color1, #1d60a2);
+}
+
+.qr-screen .subText {
+    color: var(--color1, #1d60a2);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.qr-screen .subHeader {
+    color: var(--black, #000);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+.qr-screen .box-custom {
+    min-height: 180px;
+}
+
+.paginate_button a {
+    border: none !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: #000;
+}
+.paginate_button.active a {
+    background-color: #1d60a2 !important;
+    border-radius: 2px !important;
+    color: white;
+}
+.paginate_button {
+    padding: 10px 5px !important;
+    border-radius: 10px !important;
+    background-color: white;
+}
+
+.custom-search {
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.modal-content {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.modal-header {
+    border: 0;
+    background-color: #F9F9F9;
+}
+
+.form-check-input.custom {
+    width: 23px;
+    height: 23px;
+    border: #f9f9f9;
+    margin: 0;
+    position: relative !important;
+    margin-right: 10px !important;
+}
+
+.form-control {
+    background-color: #F9F9F9;
+    border-radius: 10px;
+    border: none;
+}
+
+.form-check-label {
+    color: #A5A5A5;
+}
+
+.form-check-input.custom:checked + label {
+  color: #000;
+}
+
+.custom-file-label {
+    border-radius: 10px;
+    border: none;
+    background-color: #F9F9F9;
+    color: #A5A5A5;
+}
+
+.custom-file-input {
+    border-radius: 0px 10px 10px 0px;
+    background: #A5A5A5;
+}
+
+.modal-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.btn-transparent {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid var(--color1, #1D60A2);
+    color: #1D60A2;
+}
