@@ -12,7 +12,7 @@ class ProfilController extends Controller
     }
     public function pengguna()
     {
-        return view('admins.users.index');
+        return view('admins.Users.index');
     }
     public function cek_users($id)
     {

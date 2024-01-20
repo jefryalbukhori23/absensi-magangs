@@ -161,6 +161,10 @@
                         '<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="' +
                         response.email + '">' +
                         '</div>' +
+                        '<div class="form-group">'+
+                        '<label for="recipient-name" class="col-form-label">Username</label>'+
+                        '<input type="text" class="form-control" value="'+response.username+'" id="username" name="username" placeholder="username">'+
+                        '</div>'+
                         '<div class="form-group">' +
                         '<label for="recipient-name" class="col-form-label">Telepon</label>' +
                         '<input type="number" class="form-control" id="telephone_number" name="telephone_number" placeholder="Telepon" value="' +

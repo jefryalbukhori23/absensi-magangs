@@ -20,6 +20,9 @@
                     data: "name",
                 },
                 {
+                    data: "username",
+                },
+                {
                     data: "email",
                 },
                 {
@@ -126,6 +129,11 @@
                         '<input type="text" class="form-control" value="'+response.name+'" id="school_name" name="name"' +
                         'placeholder="Nama">' +
                         '</div>' +
+                        '<div class="form-group">'+
+                        '<label for="recipient-name" class="col-form-label">Username</label>'+
+                        '<input type="text" value="'+response.username+'" class="form-control" id="school_name" name="username"'+
+                            'placeholder="Username">'+
+                        '</div>'+
                         '<div class="form-group">' +
                         '<label for="recipient-name" class="col-form-label">Email</label>' +
                         '<input type="email" class="form-control" value="'+response.email+'" id="email" name="email" placeholder="Email">' +

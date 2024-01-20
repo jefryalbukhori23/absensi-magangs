@@ -35,11 +35,13 @@ class userController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
             'password' => 'required',
         ]);
 
         $data = new User();
         $data->name = $request->name;
+        $data->username = $request->username;
         $data->email = $request->email;
         $data->password = Hash::make($request->password);
         $data->role = 'admin';
@@ -84,7 +86,14 @@ class userController extends Controller
                 'email' => 'email|unique:users',
             ]);
         }
+        if($data->username !== $request->username)
+        {
+            $request->validate([
+                'username' => 'unique:users',
+            ]);
+        }
         $data->name = $request->name;
+        $data->username = $request->username;
         $data->email = $request->email;
         if($request->password){
             $data->password = Hash::make($request->password);

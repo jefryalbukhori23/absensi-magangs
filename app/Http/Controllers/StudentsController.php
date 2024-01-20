@@ -38,6 +38,7 @@ class StudentsController extends Controller
             'id_school' => 'required|integer',
             'fullname' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
             // 'nisn' => 'string|max:255',
             // 'gender' => 'in:L,P',
             // 'place_birth' => 'string|max:255',
@@ -47,6 +48,7 @@ class StudentsController extends Controller
 
         $user = new User();
         $user->name = $request->fullname;
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make('123456');
         $user->role = 'student';
@@ -76,7 +78,7 @@ class StudentsController extends Controller
     public function show(string $id)
     {
         $data = students::join('users','students.id_user','users.id')
-        ->select('students.*','users.email')
+        ->select('students.*','users.email','users.username')
         ->where('students.id',$id)
         ->first();
         // dd($data);
@@ -114,6 +116,19 @@ class StudentsController extends Controller
         
         $user = User::find($student->id_user);
         $user->name = $request->fullname;
+        if($user->email !== $request->email)
+        {
+            $request->validate([
+                'email' => 'email|unique:users',
+            ]);
+        }
+        if($user->username !== $request->username)
+        {
+            $request->validate([
+                'username' => 'unique:users',
+            ]);
+        }
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->save();
 

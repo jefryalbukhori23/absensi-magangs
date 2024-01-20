@@ -11,13 +11,13 @@ class AuthController extends Controller
 {
     public function index(Request $request)
     {
-        return view('Auth.login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'login' => 'required',
             'password' => 'required',
         ]);
 
@@ -36,9 +36,18 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
         }
 
+        $loginType = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL)
+        ? 'email'
+        : 'username';
+        
+        $credentials = [
+            $loginType => $request->input('login'),
+            'password' => $request->input('password'),
+        ];
+
         // dd($request->all());
 
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
 
         try {
             if (Auth::attempt($credentials)) {

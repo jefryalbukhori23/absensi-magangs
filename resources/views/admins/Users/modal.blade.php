@@ -17,6 +17,11 @@
                             placeholder="Nama">
                     </div>
                     <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Username</label>
+                        <input type="text" class="form-control" id="school_name" name="username"
+                            placeholder="Nama">
+                    </div>
+                    <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                     </div>

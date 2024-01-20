@@ -71,8 +71,8 @@
                     <div class="absolute bottom-5 text right-3">
                         <i class="fa-solid fa-user"></i>
                     </div>
-                    <label for="" class="Inter text-[16px] text-color1 mb-2">Masukkan Email</label>
-                    <input class="p-3 w-full Inter font-normal border border-color1 bg-white outline-none focus:outline-offset-0 focus:outline-color1 h-[64px] rounded-[10px]" placeholder="Username" type="email" name="email" id="email">
+                    <label for="" class="Inter text-[16px] text-color1 mb-2">Masukkan Email / Username</label>
+                    <input class="p-3 w-full Inter font-normal border border-color1 bg-white outline-none focus:outline-offset-0 focus:outline-color1 h-[64px] rounded-[10px]" placeholder="Email / Username" type="text" name="login" id="email">
                 </div>
                 <div class="relative w-full flex flex-col mb-4">
                     <div class="absolute bottom-5 text right-3">
