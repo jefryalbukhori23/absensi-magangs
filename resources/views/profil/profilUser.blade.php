@@ -40,7 +40,7 @@
                 <div class="relative">
                     <i class="fa-solid fa-user absolute text-color1 right-1 top-10 w-[20px] h-[20px]"></i>
                     <label for="" class="text-[16px] Inter font-normal text-color1">username</label>
-                    <input type="text" value="{{ auth()->user()->name }}" name="" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
+                    <input type="text" value="{{ auth()->user()->username }}" name="" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
                 </div>
                 <div class="relative my-4">
                     <i class="fa-solid fa-eye absolute text-color1 right-1 top-10 w-[20px] h-[20px]"></i>

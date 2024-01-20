@@ -39,7 +39,7 @@
                 <div class="relative">
                     <i class="fa-solid fa-user absolute text-color1 right-1 top-10 w-[20px] h-[20px]"></i>
                     <label for="" class="text-[16px] Inter font-normal text-color1">username</label>
-                    <input type="text" name="" value="{{ auth()->user()->name }}" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
+                    <input type="text" name="" value="{{ auth()->user()->username }}" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
                 </div>
                 <div class="relative my-4">
                     <i class="fa-solid fa-eye absolute text-color1 right-1 top-10 w-[20px] h-[20px]"></i>
@@ -86,7 +86,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('assets/dist/js/demo.js')}}"></script>
+{{-- <script src="{{asset('assets/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script>
     
