@@ -15,6 +15,7 @@
                         <th>NISN</th>
                         <th>Tanggal Absensi</th>
                         <th>Jam Absensi</th>
+                        <th>Keperluan</th>
                         <th>Keterangan</th>
                         <th>Foto</th>
                         <th>Latitude</th>

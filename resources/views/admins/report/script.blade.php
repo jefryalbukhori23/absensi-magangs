@@ -49,6 +49,22 @@
                     data: "time",
                 },
                 {
+                    data: "need",
+                    render: function(data){
+                        if(data == 'D'){
+                            return 'Datang';
+                        }else if(data == 'P'){
+                            return 'Pulang';
+                        }else if(data == 'S'){
+                            return 'Sakit';
+                        }else if(data == 'I'){
+                            return 'Izin';
+                        }else if(data == 'A'){
+                            return 'Alpha';
+                        }
+                    }
+                },
+                {
                     data: "status",
                     render: function(data){
                         if(data == 'Tepat'){

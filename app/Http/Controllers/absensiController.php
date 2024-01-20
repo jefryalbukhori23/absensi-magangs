@@ -72,30 +72,56 @@ class absensiController extends Controller
     public function get_data_absensi()
     {
         date_default_timezone_set('Asia/Jakarta');
-        $absensi = absensi::where('date',date('Y-m-d'))->first();
-        if(!$absensi)
-        {
-            $new_absensi = new absensi();
-            $new_absensi->date = date('Y-m-d');
-            $new_absensi->total_students = 0;
-            $new_absensi->save();
-            $absensi = absensi::where('date',date('Y-m-d'))->first();
-        }
-        $absensi_setting = absensi_setting::find(1);
-        $now = date('H:i:s');
-        if($now < $absensi_setting->home_time){
-            $data = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','D')
+        $tgl_now = date('Y-m-d');
+        $absensi = absensi::latest()->get();
+
+        $data = array();
+        $index = 0;
+        foreach($absensi as $absen){
+            $datas = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
+            ->where('absensi_details.id_absensi',$absen->id)
             ->select('absensi_details.*','students.fullname','students.nisn','absensis.date')
             ->get();
-        }else{
-            $data = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','P')
-            ->select('absensi_details.*','students.fullname','students.nisn','absensis.date')
-            ->get();
+            foreach($datas as $item)
+            {
+                $data[$index]['id'] = $item->id;
+                $data[$index]['fullname'] = $item->fullname;
+                $data[$index]['nisn'] = $item->nisn;
+                $data[$index]['date'] = $item->date;
+                $data[$index]['time'] = $item->time;
+                $data[$index]['status'] = $item->status;
+                $data[$index]['photo'] = $item->photo;
+                $data[$index]['latitude'] = $item->latitude;
+                $data[$index]['longitude'] = $item->longitude;
+                $data[$index]['need'] = $item->needs;
+                $index++;
+            }
         }
+        
+        // if(!$absensi)
+        // {
+        //     $new_absensi = new absensi();
+        //     $new_absensi->date = date('Y-m-d');
+        //     $new_absensi->total_students = 0;
+        //     $new_absensi->save();
+        //     $absensi = absensi::where('date',$tgl_now)->first();
+        // }
+        
+        // $absensi_setting = absensi_setting::find(1);
+        // $now = date('H:i:s');
+        // if($now < $absensi_setting->home_time){
+        //     $data = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
+        //     ->where('absensi_details.id_absensi',$absensi->id)
+        //     ->where('absensi_details.needs','D')
+        //     ->select('absensi_details.*','students.fullname','students.nisn','absensis.date')
+        //     ->get();
+        // }else{
+        //     $data = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
+        //     ->where('absensi_details.id_absensi',$absensi->id)
+        //     ->where('absensi_details.needs','P')
+        //     ->select('absensi_details.*','students.fullname','students.nisn','absensis.date')
+        //     ->get();
+        // }
 
         return response()->json([
             'data' => $data
@@ -105,74 +131,49 @@ class absensiController extends Controller
     public function get_data_absensi_persekolah()
     {
         date_default_timezone_set('Asia/Jakarta');
-        $absensi = absensi::where('date',date('Y-m-d'))->first();
-        if(!$absensi)
-        {
-            $new_absensi = new absensi();
-            $new_absensi->date = date('Y-m-d');
-            $new_absensi->total_students = 0;
-            $new_absensi->save();
-            $absensi = absensi::where('date',date('Y-m-d'))->first();
-        }
-        $absensi_setting = absensi_setting::find(1);
-        $now = date('H:i:s');
-        if($now < $absensi_setting->home_time){
-            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->join('schools','students.id_school','schools.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','D')
-            ->select('absensi_details.*','schools.school_name')
-            ->get();
-            $keperluan = 'D';
-        }else{
-            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->join('schools','students.id_school','schools.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','P')
-            ->select('absensi_details.*','schools.school_name')
-            ->get();
-            $keperluan = 'P';
-        }
+        $absensi = absensi::latest()->get();
 
         $datas = array();
         $index = 0;
         $school = schools::all();
-        foreach($school as $item)
-        {
-            $siswa_magang = students::where('id_school',$item->id)->count();
-            $siswa_hadir = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->join('schools','students.id_school','schools.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs',$keperluan)
-            ->where('schools.id',$item->id)
-            ->count();
-            $sakit = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->join('schools','students.id_school','schools.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','S')
-            ->where('schools.id',$item->id)
-            ->count();
-            $izin = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->join('schools','students.id_school','schools.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','I')
-            ->where('schools.id',$item->id)
-            ->count();
-            $alpha = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->join('schools','students.id_school','schools.id')
-            ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','A')
-            ->where('schools.id',$item->id)
-            ->count();
-
-            $datas[$index]['school_name'] = $item->school_name;
-            $datas[$index]['date'] = $absensi->date;
-            $datas[$index]['siswa_magang'] = $siswa_magang;
-            $datas[$index]['siswa_hadir'] = $siswa_hadir;
-            $datas[$index]['sakit'] = $sakit;
-            $datas[$index]['izin'] = $izin;
-            $datas[$index]['alpha'] = $alpha;
-            $index++;
+        foreach($absensi as $absen){
+            foreach($school as $item)
+            {
+                $siswa_magang = students::where('id_school',$item->id)->count();
+                $siswa_hadir = absensi_detail::join('students','absensi_details.id_student','students.id')
+                ->join('schools','students.id_school','schools.id')
+                ->where('absensi_details.id_absensi',$absen->id)
+                ->where('absensi_details.needs','D')
+                ->where('schools.id',$item->id)
+                ->count();
+                $sakit = absensi_detail::join('students','absensi_details.id_student','students.id')
+                ->join('schools','students.id_school','schools.id')
+                ->where('absensi_details.id_absensi',$absen->id)
+                ->where('absensi_details.needs','S')
+                ->where('schools.id',$item->id)
+                ->count();
+                $izin = absensi_detail::join('students','absensi_details.id_student','students.id')
+                ->join('schools','students.id_school','schools.id')
+                ->where('absensi_details.id_absensi',$absen->id)
+                ->where('absensi_details.needs','I')
+                ->where('schools.id',$item->id)
+                ->count();
+                $alpha = absensi_detail::join('students','absensi_details.id_student','students.id')
+                ->join('schools','students.id_school','schools.id')
+                ->where('absensi_details.id_absensi',$absen->id)
+                ->where('absensi_details.needs','A')
+                ->where('schools.id',$item->id)
+                ->count();
+    
+                $datas[$index]['school_name'] = $item->school_name;
+                $datas[$index]['date'] = $absen->date;
+                $datas[$index]['siswa_magang'] = $siswa_magang;
+                $datas[$index]['siswa_hadir'] = $siswa_hadir;
+                $datas[$index]['sakit'] = $sakit;
+                $datas[$index]['izin'] = $izin;
+                $datas[$index]['alpha'] = $alpha;
+                $index++;
+            }
         }
 
         return response()->json([
