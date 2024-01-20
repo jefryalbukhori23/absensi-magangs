@@ -117,18 +117,33 @@
                 },
                 {
                     data: "siswa_magang",
+                    render: function(data){
+                        return data + ' Siswa';
+                    }
                 },
                 {
                     data: "siswa_hadir",
+                    render: function(data){
+                        return data + ' Siswa';
+                    }
                 },
                 {
                     data: "sakit",
+                    render: function(data){
+                        return data + ' Siswa';
+                    }
                 },
                 {
                     data: "izin",
+                    render: function(data){
+                        return data + ' Siswa';
+                    }
                 },
                 {
                     data: "alpha",
+                    render: function(data){
+                        return data + ' Siswa';
+                    }
                 },
             ]
         });
