@@ -74,7 +74,7 @@ class FaceRecognitionController extends Controller
             // Hitung jarak antara kedua titik
             $jarak = $this->haversine($latitude_kantor, $longitude_kantor, $latitude_now, $longitude_now);
             // Pengecekan apakah jarak lebih dari 10 meter
-            $tolerance = 0.01; // Ubah nilai ini sesuai dengan kebutuhan Anda
+            $tolerance = 0.05; // Ubah nilai ini sesuai dengan kebutuhan Anda
             if ($jarak > $tolerance) {
                 $info->status = 'GL';
                 $info->save();

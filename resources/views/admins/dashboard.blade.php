@@ -37,7 +37,7 @@
               </svg>
               <div class="d-flex flex-column items-center justify-content-start">
                 <p class="header">Jumlah Siswa Hadir Hari Ini</p>
-                <p class="number"><span id="jml-siswa"></span> 20 Siswa</p>
+                <p class="number">{{ $siswa_hadir }} Siswa</p>
               </div>
             </div>
         </div>

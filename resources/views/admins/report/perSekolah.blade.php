@@ -11,14 +11,13 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>NISN</th>
+                        <th>Nama Sekolah</th>
                         <th>Tanggal Absensi</th>
-                        <th>Jam Absensi</th>
-                        <th>Keterangan</th>
-                        <th>Foto</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
+                        <th>Jumlah Siswa Magang</th>
+                        <th>Jumlah Hadir</th>
+                        <th>Sakit</th>
+                        <th>Izin</th>
+                        <th>Alpha</th>
                     </tr>
                 </thead>
             </table>

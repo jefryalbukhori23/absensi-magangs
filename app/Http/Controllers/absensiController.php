@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\absensi;
 use App\Models\absensi_detail;
 use App\Models\absensi_setting;
+use App\Models\schools;
+use App\Models\students;
 use Illuminate\Http\Request;
 
 class absensiController extends Controller
@@ -79,21 +81,20 @@ class absensiController extends Controller
             $new_absensi->save();
             $absensi = absensi::where('date',date('Y-m-d'))->first();
         }
-        $absensi = absensi_setting::find(1);
+        $absensi_setting = absensi_setting::find(1);
         $now = date('H:i:s');
-        if($now < $absensi->home_time){
-            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
+        if($now < $absensi_setting->home_time){
+            $data = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
             ->where('absensi_details.id_absensi',$absensi->id)
             ->where('absensi_details.needs','D')
-            ->select('absensi_details.*','students.fullname','students.nisn')
+            ->select('absensi_details.*','students.fullname','students.nisn','absensis.date')
             ->get();
         }else{
-            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
-            ->where('absensi_details.id_absensi',$absensi->id)->where('absensi_details.needs','P')
+            $data = absensi_detail::join('absensis','absensi_details.id_absensi','absensis.id')->join('students','absensi_details.id_student','students.id')
             ->where('absensi_details.id_absensi',$absensi->id)
-            ->where('absensi_details.needs','D')
-            ->select('absensi_details.*','students.fullname','students.nisn')
-            ->get();;
+            ->where('absensi_details.needs','P')
+            ->select('absensi_details.*','students.fullname','students.nisn','absensis.date')
+            ->get();
         }
 
         return response()->json([
@@ -113,26 +114,69 @@ class absensiController extends Controller
             $new_absensi->save();
             $absensi = absensi::where('date',date('Y-m-d'))->first();
         }
-        $absensi = absensi_setting::find(1);
+        $absensi_setting = absensi_setting::find(1);
         $now = date('H:i:s');
-        if($now < $absensi->home_time){
+        if($now < $absensi_setting->home_time){
             $data = absensi_detail::join('students','absensi_details.id_student','students.id')
             ->join('schools','students.id_school','schools.id')
             ->where('absensi_details.id_absensi',$absensi->id)
             ->where('absensi_details.needs','D')
             ->select('absensi_details.*','schools.school_name')
             ->get();
+            $keperluan = 'D';
         }else{
             $data = absensi_detail::join('students','absensi_details.id_student','students.id')
             ->join('schools','students.id_school','schools.id')
             ->where('absensi_details.id_absensi',$absensi->id)
             ->where('absensi_details.needs','P')
             ->select('absensi_details.*','schools.school_name')
-            ->get();;
+            ->get();
+            $keperluan = 'P';
+        }
+
+        $datas = array();
+        $index = 0;
+        $school = schools::all();
+        foreach($school as $item)
+        {
+            $siswa_magang = students::where('id_school',$item->id)->count();
+            $siswa_hadir = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->join('schools','students.id_school','schools.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs',$keperluan)
+            ->where('schools.id',$item->id)
+            ->count();
+            $sakit = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->join('schools','students.id_school','schools.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','S')
+            ->where('schools.id',$item->id)
+            ->count();
+            $izin = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->join('schools','students.id_school','schools.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','I')
+            ->where('schools.id',$item->id)
+            ->count();
+            $alpha = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->join('schools','students.id_school','schools.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','A')
+            ->where('schools.id',$item->id)
+            ->count();
+
+            $datas[$index]['school_name'] = $item->school_name;
+            $datas[$index]['date'] = $absensi->date;
+            $datas[$index]['siswa_magang'] = $siswa_magang;
+            $datas[$index]['siswa_hadir'] = $siswa_hadir;
+            $datas[$index]['sakit'] = $sakit;
+            $datas[$index]['izin'] = $izin;
+            $datas[$index]['alpha'] = $alpha;
+            $index++;
         }
 
         return response()->json([
-            'data' => $data
+            'data' => $datas
         ], 200);
     }
 }
