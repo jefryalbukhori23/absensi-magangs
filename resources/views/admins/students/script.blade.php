@@ -138,7 +138,7 @@
                         '<select name="id_school" id="" class="form-control">' +
                         '<option value="" disabled> -- Pilih Sekolah -- </option>' +
                         '@foreach ($schools as $item)' +
-                        '<option value="{{ $item->id }}" @if($item->id === ' + response.id_school + ') selected @endif>{{ $item->school_name }}</option>' +
+                        '<option value="{{ $item->id }}" '+(response.id_school == "{{ $item->id }}" ? "selected" : "")+'>{{ $item->school_name }}</option>' +
                         '@endforeach' +
                         '</select>' +
                         '</div>' +
